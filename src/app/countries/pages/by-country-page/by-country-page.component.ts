@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component , Input, OnInit} from '@angular/core';
 import { Country } from '../../interfaces/country';
-import { CountriesService } from '../../services/countries.service';
+import { CountryService } from '../../services/countries.service';
 
 @Component({
   selector: 'app-by-country-page',
@@ -8,18 +8,20 @@ import { CountriesService } from '../../services/countries.service';
   styles: [
   ]
 })
-export class ByCountryPageComponent {
+export class ByCountryPageComponent implements OnInit {
+   public countries: Country[] = [];
+   public initialValue: string = '';
 
-  public countries: Country[] = [];
-
-  constructor( private countriesService: CountriesService ) {}
-
-  searchByCountry( term: string ):void  {
-    this.countriesService.searchCountry( term )
-      .subscribe( countries => {
-        this.countries = countries;
-      });
-
+   constructor(private countryService: CountryService){ }
+  ngOnInit(): void {
+    this.countries = this.countryService.cacheStore.byCountries.countries;
+    this.initialValue = this.countryService.cacheStore.byCountries.term;
   }
 
+   searchByCountry(region: string):void{
+          this.countryService.searchCountry( region )
+            .subscribe(countries => {
+              this.countries = countries;
+            })
+   }
 }

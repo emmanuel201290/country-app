@@ -26,16 +26,16 @@ export interface Country {
   flag:         string;
   maps:         Maps;
   population:   number;
-  gini?:        { [key: string]: number };
   fifa:         string;
   car:          Car;
   timezones:    string[];
   continents:   string[];
-  flags:        CoatOfArms;
+  flags:        Flags;
   coatOfArms:   CoatOfArms;
   startOfWeek:  string;
   capitalInfo:  CapitalInfo;
   postalCode?:  PostalCode;
+  gini?:        { [key: string]: number };
 }
 
 export interface CapitalInfo {
@@ -53,12 +53,12 @@ export interface CoatOfArms {
 }
 
 export interface Currencies {
+  EUR?: Clp;
+  YER?: Clp;
+  DOP?: Clp;
+  CLP?: Clp;
   USD?: Clp;
   CRC?: Clp;
-  DOP?: Clp;
-  EUR?: Clp;
-  CLP?: Clp;
-  YER?: Clp;
 }
 
 export interface Clp {
@@ -76,16 +76,22 @@ export interface Eng {
   m: string;
 }
 
+export interface Flags {
+  png:  string;
+  svg:  string;
+  alt?: string;
+}
+
 export interface Idd {
   root:     string;
   suffixes: string[];
 }
 
 export interface Languages {
-  spa?: string;
   ita?: string;
-  eng?: string;
   ara?: string;
+  spa?: string;
+  eng?: string;
 }
 
 export interface Maps {
@@ -100,10 +106,10 @@ export interface Name {
 }
 
 export interface NativeName {
-  spa?: Translation;
   ita?: Translation;
-  eng?: Translation;
   ara?: Translation;
+  spa?: Translation;
+  eng?: Translation;
 }
 
 export interface Translation {
